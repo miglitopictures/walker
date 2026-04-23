@@ -33,8 +33,13 @@ function setup() {
 function update() {
 
     // Move walker
-    walker.x += 1
+    walker.x += (Math.floor(Math.random() * 3) - 1) * 4
+    walker.y += (Math.floor(Math.random() * 3) - 1) * 4
 
+    if (walker.x >= width) walker.x = 0
+    if (walker.x < 0) walker.x = width
+    if (walker.y >= height) walker.y = 0
+    if (walker.x < 0) walker.y = height
 
     draw()
     setTimeout(update, 1000/FPS) // call next frame
@@ -43,7 +48,7 @@ function update() {
 function draw() {
     // Draw walker
     ctx.fillStyle = ORANGE
-    ctx.fillRect(walker.x,walker.y,40,40)
+    ctx.fillRect(walker.x, walker.y, 5, 5)
 }
 
 setup()
