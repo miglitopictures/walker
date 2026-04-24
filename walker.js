@@ -11,6 +11,18 @@ class Walker {
         this.x = x;
         this.y = y;
     }
+
+    walk(speed) {
+        this.x += (Math.floor(Math.random() * 3) - 1) * speed
+        this.y += (Math.floor(Math.random() * 3) - 1) * speed
+    }
+
+    wrapAround(){
+        if (this.x >= width) this.x = 0
+        if (this.x < 0) this.x = width
+        if (this.y >= height) this.y = 0
+        if (this.y < 0) this.y = height
+    }
 }
 
 const world = document.getElementById("world")
@@ -27,19 +39,14 @@ function setup() {
 
     
 
-    clearScreen(PERFECTGREY)
+    clearScreen(BLACK)
 }
 
 function update() {
 
     // Move walker
-    walker.x += (Math.floor(Math.random() * 3) - 1) * 4
-    walker.y += (Math.floor(Math.random() * 3) - 1) * 4
-
-    if (walker.x >= width) walker.x = 0
-    if (walker.x < 0) walker.x = width
-    if (walker.y >= height) walker.y = 0
-    if (walker.x < 0) walker.y = height
+    walker.walk(7)
+    walker.wrapAround()
 
     draw()
     setTimeout(update, 1000/FPS) // call next frame
@@ -47,7 +54,7 @@ function update() {
 
 function draw() {
     // Draw walker
-    ctx.fillStyle = ORANGE
+    ctx.fillStyle = 'rgba(255, 145, 0, 0.6)';
     ctx.fillRect(walker.x, walker.y, 5, 5)
 }
 
