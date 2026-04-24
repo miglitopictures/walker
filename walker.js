@@ -25,8 +25,8 @@ class Walker {
     }
 }
 
-const world = document.getElementById("world")
-const ctx = world.getContext("2d")
+const sketch = document.getElementById("sketch")
+const ctx = sketch.getContext("2d")
 
 var width = 500
 var height = 500
@@ -34,8 +34,8 @@ var height = 500
 const walker = new Walker(width / 2, height / 2)
 
 function setup() {
-    world.width = width
-    world.height = height
+    sketch.width = width
+    sketch.height = height
 
     
 
@@ -64,5 +64,20 @@ setTimeout(update, 1000/FPS)
 
 function clearScreen(color){
     ctx.fillStyle = color
-    ctx.fillRect(0, 0, world.width, world.height)
+    ctx.fillRect(0, 0, sketch.width, sketch.height)
+}
+
+function savePng(canvas){
+    // 1. Get the image data as a PNG URL
+    const imageURL = canvas.toDataURL("image/png");
+
+    // 2. Create a temporary link element
+    const link = document.createElement('a');
+    link.href = imageURL;
+    
+    // 3. Set the desired filename
+    link.download = 'my-drawing.png';
+
+    // 4. Trigger the download
+    link.click();
 }
