@@ -5,33 +5,14 @@ const PERFECTGREY = "#808080"
 const BLACK = "#000000"
 const ORANGE = "#ff9900"
 
-
-class Walker {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    walk(speed) {
-        this.x += (Math.floor(Math.random() * 3) - 1) * speed
-        this.y += (Math.floor(Math.random() * 3) - 1) * speed
-    }
-
-    wrapAround(){
-        if (this.x >= width) this.x = 0
-        if (this.x < 0) this.x = width
-        if (this.y >= height) this.y = 0
-        if (this.y < 0) this.y = height
-    }
-}
-
-const sketch = document.getElementById("sketch")
+// const sketch = document.getElementById("sketch") // se o id do element html tem um nome valido em javascript, podemos acessar diretamente
 const ctx = sketch.getContext("2d")
 
 var width = 500
 var height = 500
 
-const walker = new Walker(width / 2, height / 2)
+const randomWalker = new RandomWalker(width / 2, height / 2)
+const vectorMover = new Mover(width / 2, height / 2)
 
 function setup() {
     sketch.width = width
@@ -44,18 +25,21 @@ function setup() {
 
 function update() {
 
-    // Move walker
-    walker.walk(7)
-    walker.wrapAround()
+    // Move randomWalker
+    randomWalker.walk(7)
+    randomWalker.wrapAround()
+
+    // Move mover
+    vectorMover.move()
+    vectorMover.wrapAround()
 
     draw()
     setTimeout(update, 1000/FPS) // call next frame
 }
 
 function draw() {
-    // Draw walker
-    ctx.fillStyle = 'rgba(255, 145, 0, 0.6)';
-    ctx.fillRect(walker.x, walker.y, 5, 5)
+    randomWalker.show('rgba(255, 145, 0, 0.6)')
+    vectorMover.show(ORANGE)
 }
 
 setup()
@@ -67,7 +51,7 @@ function clearScreen(color){
     ctx.fillRect(0, 0, sketch.width, sketch.height)
 }
 
-function savePng(canvas){
+function saveCanvasAsPng(canvas){
     // 1. Get the image data as a PNG URL
     const imageURL = canvas.toDataURL("image/png");
 
