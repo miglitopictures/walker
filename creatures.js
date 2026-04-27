@@ -27,7 +27,7 @@ class Mover {
 
     constructor(x, y){
         this.position = new Vector(x, y)
-        this.velocity = new Vector(2,1)
+        this.velocity = new Vector(2.7,1)
     }
 
     move(){

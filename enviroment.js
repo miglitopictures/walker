@@ -39,7 +39,7 @@ function update() {
 
 function draw() {
     randomWalker.show('rgba(255, 145, 0, 0.6)')
-    vectorMover.show(ORANGE)
+    vectorMover.show("purple")
 }
 
 setup()
@@ -51,17 +51,3 @@ function clearScreen(color){
     ctx.fillRect(0, 0, sketch.width, sketch.height)
 }
 
-function saveCanvasAsPng(canvas){
-    // 1. Get the image data as a PNG URL
-    const imageURL = canvas.toDataURL("image/png");
-
-    // 2. Create a temporary link element
-    const link = document.createElement('a');
-    link.href = imageURL;
-    
-    // 3. Set the desired filename
-    link.download = 'my-drawing.png';
-
-    // 4. Trigger the download
-    link.click();
-}
