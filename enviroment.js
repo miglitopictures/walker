@@ -45,7 +45,7 @@ function update() {
     physicsBody.applyForce(gravity);
     physicsBodyBig.applyForce(gravity);
 
-    
+
     physicsBody.checkEdges();
     physicsBody.move();
     
@@ -57,9 +57,10 @@ function update() {
 }
 
 function draw() {
-    clearScreen(BLACK);
+    clearScreen("orange");
+    physicsBodyBig.show("red");
     physicsBody.show("purple");
-    physicsBodyBig.show("purple");
+
 }
 
 setup();
