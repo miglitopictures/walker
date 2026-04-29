@@ -27,35 +27,39 @@ function updateMousePosition(event){
 let width = 500;
 let height = 500;
 
-const randomWalker = new RandomWalker(width / 2, height / 2);
-const vectorMover = new Mover(width / 2, height / 2);
+const physicsBody = new Mover(100, 60, 2);
+const physicsBodyBig = new Mover(400, 60, 10);
+
+
+const gravity = new Vector(0,1);
 
 function setup() {
     sketch.width = width;
     sketch.height = height; 
 
-    clearScreen(BLACK);
+    // clearScreen(BLACK);
 }
 
 function update() {
 
-    // Move randomWalker
-    randomWalker.walk(7);
-    randomWalker.wrapAround();
+    physicsBody.applyForce(gravity);
+    physicsBodyBig.applyForce(gravity);
 
-    // Move mover
-    vectorMover.goTowards(mousePos);
-    vectorMover.move();
-    vectorMover.wrapAround();
+    
+    physicsBody.checkEdges();
+    physicsBody.move();
+    
+    physicsBodyBig.checkEdges();
+    physicsBodyBig.move();
 
     draw();
-    console.log(mousePos);
     setTimeout(update, 1000/FPS); // call next frame
 }
 
 function draw() {
-    randomWalker.show('rgba(255, 145, 0, 0.6)');
-    vectorMover.show("purple");
+    clearScreen(BLACK);
+    physicsBody.show("purple");
+    physicsBodyBig.show("purple");
 }
 
 setup();

@@ -20,6 +20,11 @@ function vecNormalize(vec){
     return new Vector(x,y);
 }
 
+function vecDivide(vec1,vec2){
+    const x = vec1.x / vec2.x;
+    const y = vec1.y / vec2.y;
+    return new Vector(x,y);
+}
 
 
 class Vector {
