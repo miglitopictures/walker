@@ -1,3 +1,5 @@
+// Funcões estáticas para manipular vetors.
+// Retornam um vetor
 function vecAdd(vec1,vec2){
     const x = vec1.x + vec2.x;
     const y = vec1.y + vec2.y;
@@ -10,8 +12,16 @@ function vecSubtract(vec1,vec2){
     return new Vector(x,y);
 }
 
-function vecGetMagnitude(vec){
-    return Math.sqrt(vec.x * vec.x + vec.y * vec.y);
+function vecDivide(vec1,vec2){
+    const x = vec1.x / vec2.x;
+    const y = vec1.y / vec2.y;
+    return new Vector(x,y);
+}
+
+function vecScale(vec1,factor){
+    const x = vec1.x / factor;
+    const y = vec1.y / factor;
+    return new Vector(x,y);
 }
 
 function vecNormalize(vec){
@@ -20,13 +30,11 @@ function vecNormalize(vec){
     return new Vector(x,y);
 }
 
-function vecDivide(vec1,vec2){
-    const x = vec1.x / vec2.x;
-    const y = vec1.y / vec2.y;
-    return new Vector(x,y);
+function vecGetMagnitude(vec){
+    return Math.sqrt(vec.x * vec.x + vec.y * vec.y);
 }
 
-
+// Classe Vector e métodos. //
 class Vector {
     constructor(x,y){
         this.x = x;
