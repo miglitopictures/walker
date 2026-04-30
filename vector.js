@@ -12,20 +12,21 @@ function vecSubtract(vec1,vec2){
     return new Vector(x,y);
 }
 
-function vecDivide(vec1,vec2){
-    const x = vec1.x / vec2.x;
-    const y = vec1.y / vec2.y;
+function vecDivide(vec1,scalar){
+    const x = vec1.x / scalar;
+    const y = vec1.y / scalar;
     return new Vector(x,y);
 }
 
 function vecScale(vec1,factor){
-    const x = vec1.x / factor;
-    const y = vec1.y / factor;
+    const x = vec1.x * factor;
+    const y = vec1.y * factor;
     return new Vector(x,y);
 }
 
 function vecNormalize(vec){
     const magnitude = vecGetMagnitude(vec);
+    const x = vec.x / magnitude;
     const y = vec.y / magnitude;
     return new Vector(x,y);
 }
@@ -73,5 +74,14 @@ class Vector {
             this.normalize();
             this.scale(max);
         }
+    }
+
+    setMagnitude(magnitude){
+        this.normalize();
+        this.scale(magnitude);
+    }
+
+    copy(){
+        return new Vector(this.x, this.y);
     }
 }

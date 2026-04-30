@@ -27,11 +27,11 @@ function updateMousePosition(event){
 let width = 500;
 let height = 500;
 
-const physicsBody = new Mover(100, 60, 2);
-const physicsBodyBig = new Mover(400, 60, 10);
+const physicsBody = new Mover(300, 200, 1);
+const physicsBodyBig = new Mover(400, 60, 4);
 
 
-const gravity = new Vector(0,1);
+const gravity = new Vector(0,0.4);
 
 function setup() {
     sketch.width = width;
@@ -41,15 +41,34 @@ function setup() {
 }
 
 function update() {
+    
+    let c = 0.2;
 
     physicsBody.applyForce(gravity);
     physicsBodyBig.applyForce(gravity);
 
+    if (physicsBody.contactGround(height)){
+        
+        let friction = physicsBody.vel.copy();
+        friction.scale(-1);
+        friction.setMagnitude(c);
+        physicsBody.applyForce(friction);
 
-    physicsBody.checkEdges();
+    }
+
+    if (physicsBodyBig.contactGround(height)){
+        let frictionBig = physicsBodyBig.vel.copy();
+        frictionBig.scale(-1);
+        frictionBig.setMagnitude(c);
+        physicsBodyBig.applyForce(frictionBig);
+
+    }
+
+
+    physicsBody.edgeBounce();
     physicsBody.move();
     
-    physicsBodyBig.checkEdges();
+    physicsBodyBig.edgeBounce();
     physicsBodyBig.move();
 
     draw();
