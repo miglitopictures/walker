@@ -27,8 +27,8 @@ function updateMousePosition(event){
 let width = 500;
 let height = 500;
 
-const physicsBody = new Mover(300, 200, 1);
-const physicsBodyBig = new Mover(400, 60, 4);
+const moverA = new Mover(300, 200, 1);
+const moverB = new Mover(400, 60, 4);
 
 
 const gravity = new Vector(0,0.4);
@@ -44,32 +44,35 @@ function update() {
     
     let c = 0.2;
 
-    physicsBody.applyForce(gravity);
-    physicsBodyBig.applyForce(gravity);
+    let weightA = vecMultiply(gravity, moverA.mass);
+    let weightB = vecMultiply(gravity, moverB.mass);
+    
+    moverA.applyForce(weightA);
+    moverB.applyForce(weightB);
 
-    if (physicsBody.contactGround(height)){
+    if (moverA.contactGround(height)){
         
-        let friction = physicsBody.vel.copy();
+        let friction = moverA.vel.copy();
         friction.scale(-1);
         friction.setMagnitude(c);
-        physicsBody.applyForce(friction);
+        moverA.applyForce(friction);
 
     }
 
-    if (physicsBodyBig.contactGround(height)){
-        let frictionBig = physicsBodyBig.vel.copy();
+    if (moverB.contactGround(height)){
+        let frictionBig = moverB.vel.copy();
         frictionBig.scale(-1);
         frictionBig.setMagnitude(c);
-        physicsBodyBig.applyForce(frictionBig);
+        moverB.applyForce(frictionBig);
 
     }
 
 
-    physicsBody.edgeBounce();
-    physicsBody.move();
+    moverA.edgeBounce();
+    moverA.move();
     
-    physicsBodyBig.edgeBounce();
-    physicsBodyBig.move();
+    moverB.edgeBounce();
+    moverB.move();
 
     draw();
     setTimeout(update, 1000/FPS); // call next frame
@@ -77,8 +80,8 @@ function update() {
 
 function draw() {
     clearScreen("orange");
-    physicsBodyBig.show("red");
-    physicsBody.show("purple");
+    moverB.show("red");
+    moverA.show("purple");
 
 }
 

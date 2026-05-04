@@ -8,7 +8,7 @@ class Mover {
         this.elasticity = 0.9
 
 
-        this.radius = 20 + 10 * this.mass;
+        this.radius = Math.sqrt(this.mass) * 10;
         this.topSpeed = 15;
 
     }

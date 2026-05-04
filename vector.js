@@ -12,6 +12,12 @@ function vecSubtract(vec1,vec2){
     return new Vector(x,y);
 }
 
+function vecMultiply(vec1,scalar){
+    const x = vec1.x * scalar;
+    const y = vec1.y * scalar;
+    return new Vector(x,y);
+}
+
 function vecDivide(vec1,scalar){
     const x = vec1.x / scalar;
     const y = vec1.y / scalar;
